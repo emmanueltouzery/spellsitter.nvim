@@ -231,9 +231,11 @@ M.nav = function(reverse)
 end
 
 M.attach = vim.schedule_wrap(function(bufnr)
+  print("attach!")
   bufnr = bufnr or api.nvim_get_current_buf()
 
   if not buf_enabled(bufnr) then
+    print("out")
     return false
   end
 
@@ -259,6 +261,7 @@ M.attach = vim.schedule_wrap(function(bufnr)
   end
 
   vim.wo.spell = false
+  print("attach DONE")
 end)
 
 local valid_spellcheckers = {'vimfn', 'ffi'}
