@@ -105,20 +105,25 @@ end
 
 local function buf_enabled(bufnr)
   if not api.nvim_buf_is_loaded(bufnr) then
+    print("a")
     return false
   end
   if pcall(api.nvim_buf_get_var, bufnr, 'current_syntax') then
+    print("b")
     return false
   end
   local ft = vim.bo[bufnr].filetype
   if cfg.enable ~= true and not vim.tbl_contains(cfg.enable, ft) then
+    print("c")
     return false
   end
   if not api.nvim_buf_is_loaded(bufnr)
     or api.nvim_buf_get_option(bufnr, 'buftype') ~= '' then
+    print("d")
     return false
   end
   if not pcall(get_parser, bufnr) then
+    print("e")
     return false
   end
   return true
