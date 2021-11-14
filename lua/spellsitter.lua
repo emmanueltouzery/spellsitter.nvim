@@ -300,6 +300,7 @@ function M.setup(cfg_)
     autocmd FileType * lua _G.package.loaded.spellsitter.attach()
     augroup END
   ]]
+  print("setup done")
 end
 
 return M
