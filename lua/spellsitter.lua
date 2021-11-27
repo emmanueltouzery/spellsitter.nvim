@@ -126,6 +126,7 @@ local function buf_enabled(bufnr)
     print("e")
     return false
   end
+  print("ok")
   return true
 end
 
