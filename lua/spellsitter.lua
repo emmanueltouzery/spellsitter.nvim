@@ -108,10 +108,10 @@ local function buf_enabled(bufnr)
     print("a")
     return false
   end
-  if pcall(api.nvim_buf_get_var, bufnr, 'current_syntax') then
-    print("b")
-    return false
-  end
+  -- if pcall(api.nvim_buf_get_var, bufnr, 'current_syntax') then
+  --   print("b")
+  --   return false
+  -- end
   local ft = vim.bo[bufnr].filetype
   if cfg.enable ~= true and not vim.tbl_contains(cfg.enable, ft) then
     print("c")
