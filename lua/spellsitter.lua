@@ -107,7 +107,7 @@ local function buf_enabled(bufnr)
   if not api.nvim_buf_is_loaded(bufnr) then
     return false
   end
-  print(pcall(api.nvim_buf_get_var, bufnr, 'current_syntax'))
+  -- print(pcall(api.nvim_buf_get_var, bufnr, 'current_syntax'))
   -- if pcall(api.nvim_buf_get_var, bufnr, 'current_syntax') then
   --   print("b")
   --   return false
