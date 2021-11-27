@@ -105,28 +105,24 @@ end
 
 local function buf_enabled(bufnr)
   if not api.nvim_buf_is_loaded(bufnr) then
-    print("a")
     return false
   end
+  print(pcall(api.nvim_buf_get_var, bufnr, 'current_syntax'))
   -- if pcall(api.nvim_buf_get_var, bufnr, 'current_syntax') then
   --   print("b")
   --   return false
   -- end
   local ft = vim.bo[bufnr].filetype
   if cfg.enable ~= true and not vim.tbl_contains(cfg.enable, ft) then
-    print("c")
     return false
   end
   if not api.nvim_buf_is_loaded(bufnr)
     or api.nvim_buf_get_option(bufnr, 'buftype') ~= '' then
-    print("d")
     return false
   end
   if not pcall(get_parser, bufnr) then
-    print("e")
     return false
   end
-  print("ok")
   return true
 end
 
@@ -237,11 +233,9 @@ M.nav = function(reverse)
 end
 
 M.attach = vim.schedule_wrap(function(bufnr)
-  print("attach!")
   bufnr = bufnr or api.nvim_get_current_buf()
 
   if not buf_enabled(bufnr) then
-    print("out")
     return false
   end
 
@@ -267,7 +261,6 @@ M.attach = vim.schedule_wrap(function(bufnr)
   end
 
   vim.wo.spell = false
-  print("attach DONE")
 end)
 
 local valid_spellcheckers = {'vimfn', 'ffi'}
@@ -306,7 +299,6 @@ function M.setup(cfg_)
     autocmd FileType * lua _G.package.loaded.spellsitter.attach()
     augroup END
   ]]
-  print("setup done")
 end
 
 return M
